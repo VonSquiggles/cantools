@@ -107,15 +107,15 @@ def decode_data(data: bytes,
     unpacked = formats.big_endian.unpack(bytes(data))
     unpacked.update(formats.little_endian.unpack(bytes(data[::-1])))
 
-    return unpacked # just return values of signals
+    # return unpacked # just return values of signals
 
-    # return {
-    #     field.name: _decode_field(field,
-    #                               unpacked[field.name],
-    #                               decode_choices,
-    #                               scaling)
-    #     for field in fields
-    # }
+    return {
+        field.name: _decode_field(field,
+                                  unpacked[field.name],
+                                  decode_choices,
+                                  scaling)
+        for field in fields
+    }
 
 
 def create_encode_decode_formats(datas, number_of_bytes):
